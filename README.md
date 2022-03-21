@@ -26,13 +26,13 @@ At the beginning of the program, the current stack is the root stack, which is e
 
 #### Stack navigation
 
-  * `>`: Enter stack.
+  * `>`: Enter
 
     **Precondition:** The current stack is not empty.
 
     **Effect:** Makes the stack on the top of the current stack the new current stack.
     
-  * `<`: Leave stack.
+  * `<`: Leave
 
     **Precondition:** The current stack is not the root stack.
 
@@ -40,29 +40,35 @@ At the beginning of the program, the current stack is the root stack, which is e
     
 #### Stack manipulation
 
-  * `+`: Create stack.
+  * `+`: Create
 
     **Precondition:** None.
 
     **Effect:** Pushes a new empty stack on top of the current stack.
 
-  * `-`: Destroy stack.
+  * `-`: Destroy
 
     **Precondition:** The current stack is not empty.
 
     **Effect:** Removes the stack on the top of the current stack. Any content of that stack is lost.
 
-  * `^`: Push stack.
+  * `^`: Push
 
     **Precondition:** The current stack contains at least two stacks.
 
     **Effect:** The top of the current stack is pushed onto the stack below, and removed from the current stack.
     
-  * `_`: Pop stack.
+  * `_`: Pop
 
     **Precondition:** The current stack is not empty, nor is the stack at the top of the current stack.
 
     **Effect:** The top of the top is popped from the top of the current stack, and pushed onto the current stack.
+ 
+  * `=`: Duplicate
+
+    **Precondition:** The stack is not empty.
+    
+    **Effect:** Duplicates the top element of the current stack,
  
   * `%`: Exchange
 
