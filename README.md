@@ -113,3 +113,37 @@ At the beginning of the program, the current stack is the root stack, which is e
     **Effect:** If the current stack is empty, write a zero bit, otherwise write a one bit.
 
     Bytes are written from the most significant bit to the least significant bit. If at the end of the program an incomplete byte has been output, it is padded with zeros from the *left.* Thus the program consisting only of `1010` outputs a single byte of value 10, or a line feed character if interpreted as ASCII.
+
+### Example programs
+
+#### Hello world
+
+This program just prints "Hello world" on a line by itself, with LF as line terminator (i.e. Unix style)
+```
+!+!-!!+!-!!!!+!!-!!+!-!+!-!+!!-!+!!-!!!+!!-!+!-!!!!+!!-!+!!!!-!!+!-!!!!!!+!!!-!+!!!-!+!!-!+!!!!-!+!!-!+!!-!+!-!+!!-!+!!-!!!+!!-!!+!-!!+!-!+!-!
+```
+This just puts out the bits of "Hello world" in ASCII. At the beginning, the stack is empty, thus for each `!` a 0 is output. To switch to 1, something (namely an empty stack) is put on the current (root) stack using `+`. Since now the stack is no longer empty, `!` now outputs 1 bits. To output 0 bits again, that stack content is removed with `-`.
+
+In total, the binary output of this code therefore reads (with spaces added for better comprehension):
+```
+01001000 01100101 01101100 01101000 01101111 00100000 01110111 01101111 01101101 01101100 01100100 1010
+```
+Note that the final four output bits get left-padded to 8 bits with zeros, so the actual output is:
+```
+01001000 01100101 01101100 01101000 01101111 00100000 01110111 01101111 01101101 01101100 01100100 00001010
+```
+This is the ASCII representation of the string "Hello world" with a final line feed character.
+
+#### copy input to output (cat)
+
+The following program just copies all input unchanged to output, that is, it does the same as `cat` when used as a “filter”:
+```
+?!(-))
+```
+The whole program is a loop (as the final closing parenthesis has no matching opening parenthesis, execution goes back to the beginning, just as if there were an opening parenthesis in front of the program).
+
+At the beginning of the loop, a bit is read. If standard input is at EOF, the precondition of `?` is not met, and therefore the loop (and thus the program) ends. Otherwise, if a zero bit is read, the stack is left empty, while if a one bit is read, an empty stack is pushed on the current stack (which therefore is no longer empty).
+
+The following `!` outputs a zero if the current stack is empty (that is, a zero was read), and a one otherwise (i.e. a one was read).
+
+Finally, the `(-)` is a loop that emtpties the stack for the next iteration, by removing anything on the stack (`-`) until the stack is empty (the precondion of `-` is not met, thus the loop terminates).
