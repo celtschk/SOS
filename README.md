@@ -153,3 +153,19 @@ At the beginning of the loop, a bit is read. If standard input is at EOF, the pr
 The following `!` outputs a zero if the current stack is empty (that is, a zero was read), and a one otherwise (i.e. a one was read).
 
 Finally, the `(-)` is a loop that emtpties the stack for the next iteration, by removing anything on the stack (`-`) until the stack is empty (the precondion of `-` is not met, thus the loop terminates).
+
+#### Binary complement
+
+The following outputs the binary complement of the standard input.
+```
++>?<(_--)!(-))
+```
+Again, the whole program is a loop (with implied opening parenthesis at the beginning of the program).
+
+At the beginning of the loop, the current stack is empty. The program pushes an empty stack, enters it, reads a bit, and leaves the stack again. This if the read bit was a zero, the stack now contains an empty stack, if the bit was 1, it contains a stack containingan empty stack. If we reached the end of file, the loop is terminated (the final stack isn't empty in that case, but that doesn't matter).
+
+Next execution reaches `(_--)`. If the top of stack is just an empty stack, trying to pop an element (`_`) violates the precondition, and therefore immediately terminates the loop, leaving the stack unchanged. Otherwise, the top element is popped (so that now the current stack consists of two empty stack), and then the top two elements are removed (so that now the stck is empty). In the next iteration of this loop, the attempt to pop in an empty stack again violates the preconditions of pop, thus the loop now terminates with the stack empty.
+
+The end result of this is that now the stack is empty if a one was read, and not empty if a zero was read, the opposite of what a single `?` would have resulted in. Thus the following `!` outputs the complement of the bit just read.
+
+As in the previous program, the stack is now cleared for the next iteration of the loop.
