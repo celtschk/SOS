@@ -82,7 +82,7 @@ At the beginning of the program, the current stack is the root stack, which is e
 
     **Effect:** Rotates the current stack one position to the left, that is, it moves the bommon element to the top. If the current stack has less than two elements, this has no effect.
 
-  * `}`: Rotate left
+  * `}`: Rotate right
 
     **Precondition:** None.
 
