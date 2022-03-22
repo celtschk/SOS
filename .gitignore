@@ -30,3 +30,4 @@
 *.exe
 *.out
 *.app
+interpreter/sos # this is the executable name from the makefile
