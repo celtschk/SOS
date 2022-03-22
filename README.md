@@ -141,8 +141,24 @@ At the beginning of the program, the current stack is the root stack, which is e
 
 This program just prints "Hello world" on a line by itself, with LF as line terminator (i.e. Unix style)
 ```
-!+!-!!+!-!!!!+!!-!!+!-!+!-!+!!-!+!!-!!!+!!-!+!-!!!!+!!-!+!!!!-!!+!-!!!!!!+!!!-!+!!!-!+!!-!+!!!!-!+!!-!+!!-!+!-!+!!-!+!!-!!!+!!-!!+!-!!+!-!+!-!
+!+!-!!+!-!!!!+!!-!!+!-!+!-!+!!-!+!!-!!!+!!-!+!!-!!!+!!-!+!!!!-!!+!-!!!!!!+!!!-!+!!!-!+!!-!+!!!!-!+!!!-!!+!-!!+!!-!+!!-!!!+!!-!!+!-!!+!-!+!-!
 ```
+Or in *slightly* more readable form (all the text is ignored by the interpreter):
+```
+!+!-!!+!-!!!    write H
+!+!!-!!+!-!+!   write e
+-!+!!-!+!!-!!   write l
+!+!!-!+!!-!!    write l
+!+!!-!+!!!!     write o
+-!!+!-!!!!!     write space
+!+!!!-!+!!!     write w
+-!+!!-!+!!!!    write o
+-!+!!!-!!+!-!   write r
+!+!!-!+!!-!!    write l
+!+!!-!!+!-!!    write d
++!-!+!-!        write linefeed
+```
+
 This just puts out the bits of "Hello world" in ASCII. At the beginning, the stack is empty, thus for each `!` a 0 is output. To switch to 1, something (namely an empty stack) is put on the current (root) stack using `+`. Since now the stack is no longer empty, `!` now outputs 1 bits. To output 0 bits again, that stack content is removed with `-`.
 
 In total, the binary output of this code therefore reads (with spaces added for better comprehension):
