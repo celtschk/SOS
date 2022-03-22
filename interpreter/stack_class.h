@@ -16,6 +16,7 @@ public:
   stack* pop();
   void rotate_left();
   void rotate_right();
+  void print(stack const* current) const;
 private:
   stack* parent_stack;
   std::deque<stack*> contents;

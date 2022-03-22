@@ -1,5 +1,7 @@
 #include "stack_class.h"
 
+#include <iostream>
+
 stack::stack():
   parent_stack(nullptr)
 {
@@ -63,4 +65,16 @@ void stack::rotate_right()
     contents.pop_back();
     contents.push_front(top);
   }
+}
+
+void stack::print(stack const* current) const
+{
+  if (this == current)
+    std::cerr << " < ";
+  std::cerr << "[";
+  for (stack* item: contents)
+    item->print(current);
+  std::cerr << "]";
+  if (this == current)
+    std::cerr << " > ";
 }

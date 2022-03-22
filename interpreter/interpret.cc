@@ -142,11 +142,18 @@ std::map<char, std::function<bool()> > commands =
     { '!', write_bit }
   };
 
-void interpret(std::string program)
+#include <iostream>
+
+void interpret(std::string program, bool debug)
 {
   std::string::size_type pos = 0, end = program.size();
   while (pos < end)
   {
+    if (debug)
+    {
+      std::cerr << program[pos] << "; ";
+      root.print(current);
+    }
     if (program[pos] == ')')
     {
       // move to corresponding open parenthesis, or the beginning of
@@ -186,6 +193,12 @@ void interpret(std::string program)
           ++pos;
         }
       }
+    }
+    if (debug)
+    {
+      std::cerr << " -> ";
+      root.print(current);
+      std::cerr << std::endl;
     }
   }
   bitio::flush_byte();

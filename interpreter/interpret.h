@@ -3,7 +3,7 @@
 
 #include <string>
 
-void interpret(std::string program);
+void interpret(std::string program, bool debug = false);
 
 #endif
 

@@ -12,8 +12,8 @@
 using std::literals::string_literals::operator ""s;
 
 auto helptext = R"""(usage:
-  $0 file
-  $0 -c code
+  $0 [-d] file
+  $0 [-d] -c code
   $0 --help
 
 Execute code in the SOS programming language.
@@ -52,33 +52,35 @@ int main(int argc, char* argv[])
     return EXIT_SUCCESS;
   }
 
+  bool debug = (argv[1] == "-d"s);
+
   // With the option -c, execute the code from the command line
-  if (argv[1] == "-c"s)
+  if (argv[debug + 1] == "-c"s)
   {
     // there should be exactly one argument after the -c
-    if (argc != 3)
+    if (argc != debug + 3)
     {
       help(std::cerr, argv[0]);
       return EXIT_FAILURE;
     }
 
     // interpret the code
-    interpret(argv[2]);
+    interpret(argv[debug + 2], debug);
     return EXIT_SUCCESS;
   }
 
   // if we get here, the filename form is used. In that case, there
   // should be exactly one argument.
-  if (argc != 2)
+  if (argc != debug + 2)
   {
     help(std::cerr, argv[0]);
     return EXIT_FAILURE;
   }
 
   // Read the program from the file and interpret it
-  std::ifstream file(argv[1]);
+  std::ifstream file(argv[debug + 1]);
   std::string code(std::istreambuf_iterator<char>(file), {});
 
-  interpret(code);
+  interpret(code, debug);
   return EXIT_SUCCESS;
 }
