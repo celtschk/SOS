@@ -4,6 +4,7 @@ A purely stack based esoteric programming language
 ## Table of contents
 
   * [Introduction](#introduction)
+  * [Repository overview](#repository-overview)
   * [The language](#the-language)
     * [Basic concepts](#basic-concepts)
     * [Commands](#commands)
@@ -16,11 +17,20 @@ A purely stack based esoteric programming language
       * [copy input to output (cat)](#copy-input-to-output-cat)
       * [Binary complement](#binary-complement)
 
+
 ## Introduction
 
 SOS is a purely stack-based esoteric programming language. The name SOS is short for Stack Of Stacks, or it is your reaction if you need to read or write code in this language.
 
 Being purely stack based here means that the only data structure the language has is the stack. The items on the stack are then, of course, also stacks, hence the name.
+
+## Repository overview
+
+This repository contains the following items:
+
+  * The language specification (part of README.md, this file).
+  * An interpreter for the language, in the directory `interpreter`.
+  * Example programs in the language, in the directory `examples`.
 
 ## The language
 
