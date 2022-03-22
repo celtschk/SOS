@@ -16,7 +16,8 @@ A purely stack based esoteric programming language
       * [Hello world](#hello-world)
       * [copy input to output (cat)](#copy-input-to-output-cat)
       * [Binary complement](#binary-complement)
-
+  * [The interpreter](#the-interpreter)
+  * [The example programs](#the-example-programs)
 
 ## Introduction
 
@@ -210,3 +211,32 @@ Next execution reaches `(_--)`. If the top of stack is just an empty stack, tryi
 The end result of this is that now the stack is empty if a one was read, and not empty if a zero was read, the opposite of what a single `?` would have resulted in. Thus the following `!` outputs the complement of the bit just read.
 
 As in the previous program, the stack is now cleared for the next iteration of the loop.
+
+## The interpreter
+
+This repository includes an interpreter for the SOS programming language written in C++.
+
+To build the interpreter, just compile all C++ souce files (`*.cc`) into a program. A simple makefile that works under Linux is also provided; running `make` in the directory `interpreter` will build an executable called `sos`.
+
+In the following, I'm assuming the executable can be executed with `interpreter/sos` (this is the case a.g. if you used the provided makefile, or if you compiled to `sos.exe` under Windows, and you are currently in the main directory of this repository). Otherwise, replace `interpreter/sos` with whatever path and name the executable has in your system.
+
+The interpreter can read the program either from a file, or directly from the command line. To run a command from a file, just type
+```
+interpreter/sos filename
+```
+For example, to run the hello world example in the directory examples, use
+```
+interpreter/sos examples/helloworld.sos
+```
+To run a program directly from the command line, you can use the command line parameter `-c` followed by the program as next parameter. Make sure to properly quote that parameter so it doesn't get interpreted by the shell. For example, to run the cat example above directly from the command line, you can use
+```
+interpreter/sos -c "?!(-))"
+```
+Here the `"` are quotes for the shell, which aren't seen by the interpreter (but if they were, it wouldn't hurt anyway, as the interpreter ignores everything it doesn't know).
+
+## The example programs
+
+The directory `examples` contains a few example programs written in the SOS programming language. The files all have the ending `.sos`.
+
+At the moment, those are just the examples also provided above.
+
