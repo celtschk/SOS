@@ -127,13 +127,13 @@ At the beginning of the program, the current stack is the root stack, which is e
 
     Bytes are read starting from the most significant bit to the least significant bit.
 
-  * `!`: Wite a bit to standard output
+  * `!`: Write a single bit to standard output
 
     **Precondition:** None.
 
     **Effect:** If the current stack is empty, write a zero bit, otherwise write a one bit.
 
-    Bytes are written from the most significant bit to the least significant bit. If at the end of the program an incomplete byte has been output, it is padded with zeros from the *left.* Thus the program consisting only of `1010` outputs a single byte of value 10, or a line feed character if interpreted as ASCII.
+    Bytes are written from the most significant bit to the least significant bit. If at the end of the program an incomplete byte has been output, it is padded with zeros from the *left.* Thus a program that only produces the bits `1010` outputs a single byte of value 10, or a line feed character if interpreted as ASCII.
 
 ### Example programs
 
