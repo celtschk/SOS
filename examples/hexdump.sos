@@ -1,0 +1,151 @@
+Hex dump a file. This just gives the hex codes for all the bytes.
+
++>       Create a new stack to hold the digits, and enter it.
++>?<     Push [] for 0 or [[]] for 1.
++>?<}    Second bit, stored below first.
++>?<}    Third bit
++>?<}    Fourth bit
+<        Return to the root stack.
+
+Now the stack contains the four bits read with the most significant
+bit on the top.
+
+Next, we check if the number stored is larger than nine.
+For that we first duplicate the stack containing the number,
+so that we can mess around with it.
+
+The code below adds an empty stack if the number is less than 10, and
+a nonempty stack otherwise.
+
+=>       Duplicate and enter the duplicate.
+
+We first check the highest bit. If it is zero, the number is less than
+eight, and we can empty the stack completely.
+
+>        Enter the top digit
+(        Start a loop, which actually is an if block.
++        Push a new empty stack. Thus if the digit was 0, the current
+         stack contains one empty stack, otherwise two.
+(        Start another pseudo loop.
+%        Try to exchange the top two elements. This will fail
+         and terminate the loop if the digit was 0.
+--       Delete the two elements that are on the stack now.
+-)       Terminate the loop by trying to delete a third element that
+         of course does not exist.
+         At this point, we've toggled the bit. We're still inside the
+         highest bit.
+(        Start another if block loop
+>        Try to enter the top stack. If the top bit was originally a
+         one and thus is now a zero, this terminates the current loop.
+<<       Go down two levels. That is, we are again in the stack with
+         the four digits, but with the top digit flipped.
+(-)      Empty that stack.
++>       Since we need to be at the same nesting level when leaving
+         the loop no matter where we left it, add a new empty stack
+         and enter it.
+-)       Now leave the loop by trying to delete a nonexistent stack.
+<-       Go back to the digit string level and delete the top element.
+
+At this point, if the highest bit was 0, we are now in an empty stack.
+Otherwise we are in a stack that still contains three encoded bits.
+
+We now look at the next higher bit, which is now at the top of the
+stack. If it is 1, we know for sure that the number is larger than 9
+and therefore the stack needs to remain unempties. We check this by
+trying to pop the top element from the bit, which terminates the loop
+if the bit happend to be a zero. Coincidentally it will also fail if
+we already emptied the current stack, so we leave the pseudo loop in
+both cases, so the following code will only executed in the cases
+where a decision has still to be made.
+
+_       Pop the top element from the highest digit.
+
+If we get to this point, the stack contains two empty stacks on the
+top which we don't need. So we delete them.
+
+--      Delete the top two elements of the stack.
+
+At this point we know that the top two digits were 10, and the bottom
+two digits are still on the current stack. 
+
+The least significant digit is irrelevant to the decision, so we can
+delete it.
+
+{-      Delete the bottom element.
+
+Now the current stack contains just one digit, that is one sub stack. 
+We need to leaave the current stack empty exactly if that substack is
+empty.
+
+(_)     Pop the top element. This loop prevents the current loop
+        ending if the top of stack is empty, i.e. 0, but will end
+        afterwards because the new top of stack is empty for sure.
+-       Remove the top of stack. If the digit before was 1, this
+        leaves a single element on the stack. If the digit before
+        was 0, it removes it.
+%)      Terminate the outer pseude loop by trying to exchange the
+        top two elements despite the stack only containing one.
+<       Leave the stack.
+
+At this point, the top of stack is a nonempty stack if the number is
+larger than 10, and an empty stack otherwise.
+
+%>      Bring back theoriginal digit sequence to the top and enter it.
+
+We now extend the digit sequence to 8 bits by prepending 0011, still
+in reverse order.
+
++>+<    Prepend 1.
++>+<    Prepend 1.
++       Prepend 0.
++       Prepend 0.
+
+<%      Leave the number and bring the flag back to the top.
+
+If the number is smaller than 10, the bit code now is already the
+required ASCII code. Otherwise, we have to add 17.
+
+(>      Start a pseudo loop and enter the condition code.
+><      Try to temporarily enter the top element of the condition.
+        This will fail if the condition is false, i.e. the stack is
+        empty.
+<%>     Leave the condition code, bring the digit sequence to the top,
+        and enter it.
+
+TODO add the code to increment by 17
+
+<%>     Leave the bit sequence, bring the condition code to the top,
+        and enter it.
+_)      Terminate the pseudo loop by trying to pop either in or from
+        an empty stack.
+
+<%>     Bring back the digit sequence to the top.
+
+Now the top of the stack contains the ASCII code of the characer to
+output. We now output it, bit by bit.
+
+(       Start a loop.
+>       Enter the top digit. If none is left, this exits the loop.
+!       Output it.
+<       Leave it.
+-       Delete it.
+)       End the loop.
+
+<-      Leave the now empty digit string and delete it.
+
+Now all that is left on the stack is the condition flag. We do not
+delete it, as it serves a second purpose now. We want to add a space
+after two digits. By leaving the condition code on the stack, we can
+test if two digits have been output.
+
+(       Enter pseudo loop.
+%       If we can exchange the top two elements, we've output two
+        digits. Otherwise the pseudo loop is exited.
+--      Remove the two elements. Now the stack is empty.
+!!+!-!!!!! Output a space character
+-)      Terminate the pseudoloop by trying to remove a nonexistent
+        element.
+
+)       Terminate the main loop.
+
++!-!+!-!  Add a line feed.
