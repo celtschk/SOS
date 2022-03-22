@@ -1,6 +1,21 @@
 # SOS
 A purely stack based esoteric programming language
 
+## Table of contents
+
+* [Introduction](#introduction)
+  * [The language](#the-language)
+    * [Basic concepts](#basic-concepts)
+    * [Commands](#commands)
+      * [Stack navigation](#stack-navigation)
+      * [Stack manipulation](#stack-manipulation)
+      * [Flow control](#flow-control)
+      * [Input/Output](#inputoutput)
+    * [Example programs](#example-programs)
+      * [Hello world](#hello-world)
+      * [copy input to output (cat)](#copy-input-to-output-cat)
+      * [Binary complement](#binary-complement)
+
 ## Introduction
 
 SOS is a purely stack-based esoteric programming language. The name SOS is short for Stack Of Stacks, or it is your reaction if you need to read or write code in this language.
