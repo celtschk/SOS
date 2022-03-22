@@ -3,7 +3,7 @@ A purely stack based esoteric programming language
 
 ## Table of contents
 
-* [Introduction](#introduction)
+  * [Introduction](#introduction)
   * [The language](#the-language)
     * [Basic concepts](#basic-concepts)
     * [Commands](#commands)
