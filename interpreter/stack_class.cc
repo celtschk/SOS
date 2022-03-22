@@ -59,8 +59,8 @@ void stack::rotate_right()
 {
   if (!contents.empty())
   {
-    stack* top = contents.front();
-    contents.pop_front();
-    contents.push_back(top);
+    stack* top = contents.back();
+    contents.pop_back();
+    contents.push_front(top);
   }
 }
