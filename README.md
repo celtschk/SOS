@@ -11,7 +11,7 @@ Being purely stack based here means that the only data structure the language ha
 
 ### Basic concepts
 
-An SOS program consists of a string of characters, where each character describes a single command. Except for loops, which are enclodes in parentheses (see below for details), the commands are executed from left to right. Whitespace characters are ignored. An implementation may or may not ignore non-whitespace non-command characters.
+An SOS program consists of a string of characters, where each character describes a single command. Except for loops, which are enclodes in parentheses (see below for details), the commands are executed from left to right. Whitespace characters, letters and digits are ignored. An implementation may or may not ignore other non-command characters.
 
 Each command has a precondition and an action. If the precondition is not met, the current loop is exited, that is, execution continues after the corresponding closing parenthesis. Note that failing to meet a precondition is the only way to exit a loop. If not currently in a loop, the program is terminated instead. The program also terminates on reaching the end of the code.
 
