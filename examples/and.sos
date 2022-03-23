@@ -1,0 +1,62 @@
+This program reads a byte, and outputs the digit 1 if the lowest two
+digits are both 1, and the digit 0 otherwise. It demonstrates the
+operation and.
+
++>??????<-      Read and discard 6 bits.
++>?<+>?<        Read to bits onto the stack.
+
+Now we do the and operation.
+
++%^%^>          Create a new stack with the top two elements
+                as only elements and enter it. This stack will be our
+                return value.
+
+(_^+_)-         If the top element of the stack is empty, the first
+                pop fails, and it is deleted. Otherwise, the element
+                just popped is pushed back on the stack, and an empty
+                stack is added, popping from which now fails. That
+                additional stack is then deleted. The net effect is
+                that the top element is now deleted if and only if
+                it was empty.
+
+}               Swap the two elements. Using a rotation for this
+                purpose means there is no failure if only one element
+                remains. In either case, now the other element is
+                on the top of stack.
+
+(_^+_)-         Again, remove it if empty.
+
+If we stopped here, we would have an or operation, as the current
+stack is empty if both bits were 0, and nonempty otherwise. Since we
+want an and, we have to do more work.
+
+(               Start a loop.
+
+--              Remove two elements. If there were less than two
+                elements, one of the removals fails, leaving the
+                loop on an empty stack. Otherwise, the stack is also
+                empty, but we are still in the loop.
+
++               Add an empty stack.
+
+_)              Forcefully leave the loop by trying to pop from the
+                empty stack.
+
+At this point, the current stack is nonempty exactly of both original
+values had been truthy.
+
+<               Leave the current stack.
+
+Now the top of current stack is the logical and of the previous top
+two elements.
+
+Now output the corresponding digit. The ASCII code is formed by
+appending that bit to the seven bit seuqence 0011000.
+
++>!!+!!-!!!<-   Output 0011000
+>!<-            Output and remove the result bit.
+
+Finally we output a line feed. We take advantage of the fact that the
+stack is empty at this point.
+
++!-!+!-!        Output final linefeed
