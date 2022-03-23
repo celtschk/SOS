@@ -1,0 +1,35 @@
+This reads bytes and outputs asterisks while the least significant bit
+of the byte read is 1. This code demonstrates a while loop.
+
+(                   Beginning of loop.
+
+                    Actually in this code it is redundant because it
+                    is at the beginning of the code, but it would be
+                    needed if the loop were embedded in other code.
+
++>???????<-         Read and discard seven bits
++>?<                Read eighth bit
+
+Now the top if stack contains an empty stack if the least significant
+bit was 0, and a nonempty stack if the least significant bit was 1.
+
+>><<                Try to enter twice, and leave twice again.
+                    If the top of stack, i.e. the bit we just read,
+                    is empty, i.e. FALSE, the second enter command
+                    fails and ends the loop. Otherwise this is a noop.
+
+-                   Remove the condition flag, as it is no longer
+                    needed
+
++>!!+!-!+!-!+!-!<-  Output an asterisk
+
+)                   End of loop.
+
+<-                  At the point we exited the loop, we were inside
+                    the condition flag. Thus leave and delete it.
+                    Unnecessary in this program, but generally
+                    something one would want to do.
+
++>+!-!+!-!<-        Output a final linefeed character, taking
+                    advantage of the left padding of the last
+                    character.
