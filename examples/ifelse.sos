@@ -1,0 +1,18 @@
+This checks the lowest bit of the first byte of input, and prints Y if
+the bit is 1, and N otherwise.
+
++>???????<-         Read and discard seven bits
++>?<                Read eighth bit
+
+>(+%%               if truthy
++>!+!-!+!!-!!+!<-     output Y
+_)-<                endif
+
+>(+%---)<           toggle bit
+
+>(+%%               if truthy
++>!+!-!!+!!!-!<-     output N
+_)-<                endif
+
++>+!-!+!-!<-        output final NL
+
