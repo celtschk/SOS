@@ -237,6 +237,3 @@ Here the `"` are quotes for the shell, which aren't seen by the interpreter (but
 ## The example programs
 
 The directory `examples` contains a few example programs written in the SOS programming language. The files all have the ending `.sos`.
-
-At the moment, those are just the examples also provided above.
-
