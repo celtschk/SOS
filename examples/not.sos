@@ -1,0 +1,43 @@
+This program reads a byte, flips the lowest bit, and outputs it again,
+followed by a linefeed character. It demonstrates the logical not
+operation.
+
+
++>?<     Read first bit.
++>?<}    Read second bit, move to bottom.
++>?<}    Third bit.
++>?<}    Fourth bit.
++>?<}    5th bit.
++>?<}    6th bit.
++>?<}    7th bit.
++>?<}    8th bit.
+
+Now the byte is stored on the root stack with the most significant
+bit on the top.
+
+{        Get the last bit back on the top. This actually undoes the
+         previous command.
+>        Enter the bit
+(        Start a loop. Actually just a block.
++%%-     Add an empty stack, exchange twice and remove the top.
+         If the current stack was empty, the first swap fails
+         its precondition, and thus the loop terminates with a
+         nonempty current stack. Otherwise, all commands proceed,
+         and all changes are undone.
+(-)      Remove everything on the current stack. Actually a single
+         minus sign would suffice here, but with the loop the code
+         would work with any truthy value, that is any nonempty stack.
+-)       Terminate the loop by trying to remove the nonexistent top
+         of stack.
+
+At this point, if the stack was previously empty, i.e. a zero bit was
+read, it now contains a single empty stack. Otherwise it now empty.
+
+<        Leave the bit again.
+}        Get the least significant bit back to the bottom of the
+         stack.
+
+(>!<-)   Output and remove all bits on the stack, starting from the
+         top. This loop ends when thestack is empty.
+
++!-!+!-! Output a final line feed.
