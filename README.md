@@ -25,6 +25,8 @@ SOS is a purely stack-based esoteric programming language. The name SOS is short
 
 Being purely stack based here means that the only data structure the language has is the stack. The items on the stack are then, of course, also stacks, hence the name.
 
+As the language allows to implement the logical operations `and` and `not` as well the control structures if/else and while, it is Turing complete.
+
 ## Repository overview
 
 This repository contains the following items:
