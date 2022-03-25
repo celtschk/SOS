@@ -1,0 +1,28 @@
+This implements a looping counter. It outputs lines consisting only of
+asterisks, where the first line only consists of one asterisk, and
+each following line consists of one asterisk more.
+
++                   Initialise the program by creating an empty stack.
+
+(                   Beginning of main loop
+
+  >+<               Add a single empty stack to the first stack.
+  =>                Duplicate stack and enter it
+
+  (                 Beginning of output loop
+
+    -               Remove one element from that stack. Terminate loop
+                    if empty.
+
+    +>              Create and enter temporary empty stack
+    !!+!-!+!-!+!-!  Output an asterisk
+    <-              Leave and destroy the temporary stack
+
+  )                 End of output loop. On leaving it, the current
+                    stack is empty.
+
+  !!!!+!-!+!-!      output a line feed
+
+  <-                Leave end destroy the emptied copy
+
+)                   End of main loop
