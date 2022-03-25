@@ -49,14 +49,16 @@ eight, and we can empty the stack completely.
 At this point, if the highest bit was 0, we are now in an empty stack.
 Otherwise we are in a stack that still contains three encoded bits.
 
+><
+
 We now look at the next higher bit, which is now at the top of the
 stack. If it is 1, we know for sure that the number is larger than 9
-and therefore the stack needs to remain unempties. We check this by
-trying to pop the top element from the bit, which terminates the loop
-if the bit happend to be a zero. Coincidentally it will also fail if
-we already emptied the current stack, so we leave the pseudo loop in
-both cases, so the following code will only executed in the cases
-where a decision has still to be made.
+and therefore the stack needs to remain unemptied. We check this by
+first toggling the bit, and then trying to pop the top element from
+it, which terminates the loop if the bit happend to be a zero.
+
+>(+%---)< Toggle the top bit. If the current stack is empty, this
+        terminates the loop.
 
 _       Pop the top element from the highest digit.
 
@@ -90,7 +92,7 @@ empty.
 At this point, the top of stack is a nonempty stack if the number is
 larger than 10, and an empty stack otherwise.
 
-%>      Bring back theoriginal digit sequence to the top and enter it.
+%>      Bring back the original digit sequence to the top and enter it.
 
 We now extend the digit sequence to 8 bits by prepending 0011, still
 in reverse order.
@@ -112,7 +114,62 @@ required ASCII code. Otherwise, we have to add 17.
 <%>     Leave the condition code, bring the digit sequence to the top,
         and enter it.
 
-TODO add the code to increment by 17
++>+<    Push 1.
+{       Raise the lowest bit to the top.
++%^%^   Collect the top two elements in a new stack.
+=       Duplicate.
+>       Enter the top stack. This will be the sum bit
+(_^+_)- Remove top if empty.
+}       Rotate stack.
+(_^+_)- Remove top if empty.
+(%--%)  If two elements are still on the stack, remove both.
+<       Leave the stack. Now on the top, we have the xor of both bits.
+
+%       Exchange that bit with the other copy of the two element
+        stack.
+>       Enter the top stack. This will be the carry bit
+(_^+_)- Remove top if empty.
+}       Rotate stack.
+(_^+_)- Remove top if empty.
+(--+_)  Remove two elements, and if successful, add an empty stack.
+<       Leave the stack. Now on the top, we have the and of both bits.
+
+We now repeat all this for each of the next three bits.
+
+{+%^%^=>(_^+_)-}(_^+_)-(%--%)<%>(_^+_)-}(_^+_)-(--+_)<
+{+%^%^=>(_^+_)-}(_^+_)-(%--%)<%>(_^+_)-}(_^+_)-(--+_)<
+{+%^%^=>(_^+_)-}(_^+_)-(%--%)<%>(_^+_)-}(_^+_)-(--+_)<
+
+Now the next bit is different, as we add another 1 here. We first add
+that to the carry, producing two bits. However we alread know that the
+next bit is a 1, so the effect is that afterwards it is exactly equal
+to the carry bit. Moreover, the new carry bit is always 1, just like. 
+In other words, we can effectively perform the addition by simply
+doing nothing but pulling up the next bit from the bottom of the
+stack.
+
+Moreover we don't really need that bit any more, since all the
+remaining bits are always the same, so also the result is always the
+same. Thus we simply destroy it.
+
+{-       Get the next bit up and destroy it.
+
+The next bit is changed from 1 to 0, and the following one is changed
+from 0 to 1. This is equivalent to inserting a 0 before the 1, and
+deleting one afterwards. As that equivalent code is shorter, we do
+that.
+
++        Insert a zero
+{{       Pull up the next two bits
+-        Delete the second one.
+
+Finally, the most significant bit is unchanged. We just need to pull
+it up so that the bit order is restored.
+
+{        Pull up the most sinificant bit.
+
+Now we are done with adding, and therefore we prepare to leave the
+loop in the right state.
 
 <%>     Leave the bit sequence, bring the condition code to the top,
         and enter it.
