@@ -105,7 +105,7 @@ in reverse order.
 <%      Leave the number and bring the flag back to the top.
 
 If the number is smaller than 10, the bit code now is already the
-required ASCII code. Otherwise, we have to add 17.
+required ASCII code. Otherwise, we have to add 7.
 
 (>      Start a pseudo loop and enter the condition code.
 ><      Try to temporarily enter the top element of the condition.
@@ -114,7 +114,41 @@ required ASCII code. Otherwise, we have to add 17.
 <%>     Leave the condition code, bring the digit sequence to the top,
         and enter it.
 
-+>+<    Push 1.
+We now add 7 to the stored number. Note that 7 in binary is 111,
+therefore we have to add 1 to the lowest three bits, and handle
+the carry.
+#
+{       Pull up the first digit.
+
+For the first bit, we do not have a carry, thus adding 1 just means
+toggling it, and the new carry is just the original bit.
+
+=          Duplicate the bit for the carry.
+>(+%---)<  Complement it to get the new first bit
+%          Move it behind the carry.
+
+For the second bit, we also have to handle the carry bit. If the carry
+bit is one, we are actually adding two, which means just moving the
+carry bit on. Otherwise we do the exact same thing as before.
+#
+>(+%---)   complement the carry bit, stay inside
+(><        if the complemented carry bit is one
+<-{          leave and delete the carry bit and pull up the next bit
+>(+%---)<    complement it
+=            duplicate it to get the complement of the new carry
+}>           bury it again and enter the new carry bit
+_)         endif
+(+%---)<   complement the carry bit back to original and leave it
+{          pull up the next bit
+%          move it behind the carry bit.
+
+The third bit is treated the same way:
+#
+>(+%---)(><<-{>(+%---)<=}>_)(+%---)<{%   do the addition for the third bit.
+
+For the next bits, the carry is all we add, therefore the algorithm is
+different.
+#
 {       Raise the lowest bit to the top.
 +%^%^   Collect the top two elements in a new stack.
 =       Duplicate.
@@ -134,43 +168,31 @@ required ASCII code. Otherwise, we have to add 17.
 (--+_)  Remove two elements, and if successful, add an empty stack.
 <       Leave the stack. Now on the top, we have the and of both bits.
 
-We now repeat all this for each of the next three bits.
+The same happens for bits 5 and 6
 
 {+%^%^=>(_^+_)-}(_^+_)-(%--%)<%>(_^+_)-}(_^+_)-(--+_)<
 {+%^%^=>(_^+_)-}(_^+_)-(%--%)<%>(_^+_)-}(_^+_)-(--+_)<
-{+%^%^=>(_^+_)-}(_^+_)-(%--%)<%>(_^+_)-}(_^+_)-(--+_)<
 
-Now the next bit is different, as we add another 1 here. We first add
-that to the carry, producing two bits. However we alread know that the
-next bit is a 1, so the effect is that afterwards it is exactly equal
-to the carry bit. Moreover, the new carry bit is always 1, just like. 
-In other words, we can effectively perform the addition by simply
-doing nothing but pulling up the next bit from the bottom of the
-stack.
+For bit 7, we don't need to generate a carry, since we alread know
+that it will be zero.
 
-Moreover we don't really need that bit any more, since all the
-remaining bits are always the same, so also the result is always the
-same. Thus we simply destroy it.
+{       Raise the next bit to the top.
++%^%^   Collect the top two elements in a new stack.
+>       Enter the top stack. This will be the sum bit
+(_^+_)- Remove top if empty.
+}       Rotate stack.
+(_^+_)- Remove top if empty.
+(%--%)  If two elements are still on the stack, remove both.
+<       Leave the stack. Now on the top, we have the xor of both bits.
 
-{-       Get the next bit up and destroy it.
+Finally, we know that bit 8 is never affected, thus we can just pull
+it up.
 
-The next bit is changed from 1 to 0, and the following one is changed
-from 0 to 1. This is equivalent to inserting a 0 before the 1, and
-deleting one afterwards. As that equivalent code is shorter, we do
-that.
-
-+        Insert a zero
-{{       Pull up the next two bits
--        Delete the second one.
-
-Finally, the most significant bit is unchanged. We just need to pull
-it up so that the bit order is restored.
-
-{        Pull up the most sinificant bit.
+{       Pull up the most significant bit.
 
 Now we are done with adding, and therefore we prepare to leave the
 loop in the right state.
-
+#
 <%>     Leave the bit sequence, bring the condition code to the top,
         and enter it.
 _)      Terminate the pseudo loop by trying to pop either in or from
