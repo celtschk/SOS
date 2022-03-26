@@ -32,7 +32,7 @@ eight, and we can empty the stack completely.
 --       Delete the two elements that are on the stack now.
 -)       Terminate the loop by trying to delete a third element that
          of course does not exist.
-         At this point, we've toggled the bit. We're still inside the
+         At this point, we have toggled the bit. We are still inside the
          highest bit.
 (        Start another if block loop
 >        Try to enter the top stack. If the top bit was originally a
@@ -63,7 +63,7 @@ it, which terminates the loop if the bit happend to be a zero.
 _       Pop the top element from the highest digit.
 
 If we get to this point, the stack contains two empty stacks on the
-top which we don't need. So we delete them.
+top which we do not need. So we delete them.
 
 --      Delete the top two elements of the stack.
 
@@ -142,7 +142,7 @@ _)         endif
 {          pull up the next bit
 %          move it behind the carry bit.
 
-The third bit is treated the same way:
+The third bit is treated the same way.
 #
 >(+%---)(><<-{>(+%---)<=}>_)(+%---)<{%   do the addition for the third bit.
 
@@ -173,7 +173,7 @@ The same happens for bits 5 and 6
 {+%^%^=>(_^+_)-}(_^+_)-(%--%)<%>(_^+_)-}(_^+_)-(--+_)<
 {+%^%^=>(_^+_)-}(_^+_)-(%--%)<%>(_^+_)-}(_^+_)-(--+_)<
 
-For bit 7, we don't need to generate a carry, since we alread know
+For bit 7, we do not need to generate a carry, since we alread know
 that it will be zero.
 
 {       Raise the next bit to the top.
@@ -218,7 +218,7 @@ after two digits. By leaving the condition code on the stack, we can
 test if two digits have been output.
 
 (       Enter pseudo loop.
-%       If we can exchange the top two elements, we've output two
+%       If we can exchange the top two elements, we have output two
         digits. Otherwise the pseudo loop is exited.
 --      Remove the two elements. Now the stack is empty.
 !!+!-!!!!! Output a space character
