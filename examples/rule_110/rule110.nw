@@ -1,0 +1,527 @@
+\documentclass[enabledeprecatedfontcommands]{scrartcl}
+% noweb (at least the version provided by my distro) uses the old
+% font commands internally, therefore I enable them
+
+\usepackage{noweb}
+\usepackage{hyperref}
+
+\begin{document}
+
+\title{Rule 110 in SOS}
+\author{Christopher Eltschka}
+\maketitle
+
+@ \section{Program structure}
+
+First read the initial state from stdin, then in an infinite loop
+first output the current state, then calculate the next state.
+
+<<rule110.sos>>=
+<<read state>>
+(             main loop
+  <<write state>>
+  <<update state>>
+)             end main loop
+
+@ \section{General snippets}
+
+These are some general snippets that are used below.
+
+@ \subsection{Adding bits to the stack}
+
+Appending a 0 just means pushing an empty stack.
+<<0>>=
++             Push 0
+
+@ Appending a 1 means adding a stack containing an empty stack.
+
+<<1>>=
++>+<          Push 1
+
+@ \subsection{Condition blocks}
+
+For an iftrue, the top of the stack represents the condition. If the
+stack is non-empty, it is considered true, otherwise false. Note that
+this top bit is consumed by the end of the construct.
+
+Note also that the top bit is modified by the if and else, and must
+still be on the top when reaching else or endif.
+
+<<iftrue>>=
+(             Start if block
+  >             Enter the condition.
+
+@ At this point, we test for non-emptyness, and at the same time
+toggle the bit, so that the else part sees the complement of thje
+condition.
+
+<<iftrue>>=
+  +             Add another stack.
+  %             Exchange top elements. Fails if stack was empty.
+  (-)           Empty the stack.
+  <             Go back up to the parent stack.
+
+@ The else part closes the if block, and starts an else block. Note
+that this assumes that at the end of the if block, the emptied
+condition (or another empty stack replacing it) is still (or again) on
+the top of the current stack.
+
+<<else>>=
+  >             Enter the condition again.
+  -)            Terminate the if block by removing from empty stack
+
+@ At this point, we are inside the toggled condition bit. Therefore we
+can directly start the else block by checking that the condition is
+not empty. If that check fails, the rest of the block is skipped.
+
+<<else>>=
+  (-            Start else block.
+
+@ We finally leave the condition again, so that the else block can
+again operate on the parent stack.
+
+<<else>>=
+  <             Leave the condition.
+
+@ The endif will always be reached with an empty condition on the top.
+Therefore we can simply terminate the current block by entering it and
+tryping to delete from it (just like at the beginning of the else
+block).
+
+<<endif>>=
+  >             Enter the condition again.
+  -)            Terminate the block.
+
+@ Finally, we leave and delete the condition stack (which now no
+longer contains useful information anyway)
+
+<<endif>>=
+  <-            Leave and delete the condition.
+
+@ \subsubsection{Test condition block}
+
+We test the condition block by first doing an if/else with a condition
+0, then another with a condition 1. In both cases, the if block
+outputs an asterisk, the else block outputs a dot.
+
+Afterwards we test that the remaining stack is indeed empty by trying
+to remove the top element, and then outputting another asterisk.
+
+If everything works as it should, the output of this code should be
+a single dot followed by a single asterisk.
+
+<<testif.sos>>=
+<<0>>
+<<iftrue>>
+  <<write asterisk>>
+<<else>>
+  <<write dot>>
+<<endif>>
+
+<<1>>
+<<iftrue>>
+  <<write asterisk>>
+<<else>>
+  <<write dot>>
+<<endif>>
+
+-             Try to delete fr empty stack, terminates program
+
+<<write asterisk>> Should never be executed.
+
+@ \subsection{Constant character outputs}
+
+These to characters are used in the test programs.
+
+We use the following auxiliary routine to output a single dot.
+
+<<write dot>>=
++>!!+!-!+!!!-!<-
+
+@ We also use the following routine to output an asterisk
+
+<<write asterisk>>=
++>!!+!-!+!-!+!-!<-
+
+@ \section{Read state}
+
+The state is given in stdin as sequence of 0 and 1. Actually only the
+last bit of the byte is read, so anything with an even ASCII code can
+be used for 0, and anything with an odd ASCII code can be used as 1.
+
+The loop is terminated on EOF. Since that happens in the middle of the
+loop, we need to clean up afterwards.
+
+<<read state>>=
++>            Create a new stack to hold the input and enter it
+(             read loop
+  <<read bit>>
+)             end read loop
+<<cleanup read>>
+<             Leave the input stack and return to root.
+
+@ \subsubsection{Testing}
+
+We can do several tests of this code. If all goes well, this should
+print four dots, then the bit string that was input (using the output
+routine below)
+
+<<testreadstate.sos>>=
+<<write dot>>
+<<read state>>
+<<write dot>>
+(
+  %             Exchange. If there's only one element on the root
+                stack, this terminates the loop.
+  <<write asterisk>>
+  (-)           Delete everything. This ensures the next test will
+                terminate the program.
+-)
+<<write dot>>
+=             Duplicate. If the root stack is empty, this terminates
+              the program.
+<<write dot>>
+<<write state>>
+
+@ \subsection{Read a bit}
+
+To read a bit, we read a byte and discard everything but the last bit.
+
+If the read bit was 0, an empty stack is added to the current stack. 
+Otherwise, a stack containing an empty stack is added to the current
+stack.
+
+<<read bit>>=
++>            Create an emtpy stack and enter it.
+???????       Read the first 7 bits of the byte.
+(-)           Discard everything read so far.
+?             Read the lowest bit.
+<             Leave the stack of the new bit, returning to the parent stack.
+
+@ \subsubsection{Testing bit reading}
+
+This code can be tested by a program that simply reads bits and
+outputs them again (using the output routine defined further below).
+
+<<testreadbit.sos>>=
+(             loop until EOF
+  <<read bit>>
+  <<write and delete bit>>
+)
+
+@ \subsection{Cleaning up after read}
+
+On encountering EOF, we are inside a newly created empty stack. We
+need to leave and deletethat empty stack.
+
+<<cleanup read>>=
+<-            Delete extra bit.
+
+@ \section{Write state}
+
+To write the current state, we first duplicate the stack containing
+the state, and then output the copy bit by bit, consuming the state as
+we go, so we can and the loop on empty stack.
+
+After we've written all bits, we write a newline and leave/remove the
+now empty auxiliary stack.
+
+Note that we print the stack bottom to top (which is the same order
+we've read it). Therefore in each iteration the bottom-most bit has to
+be brought to the top in order to write it.
+
+<<write state>>=
+=>            Duplicate state stack and enter duplicate
+(             Write loop
+  {             Bring up the next bit to write.
+  <<write and delete bit>>
+)
+<<write newline>>
+<-            Leave and remove the duplicate stack.
+
+@ \subsection{Test writing the state}
+
+This code creates the bit sequence 01101110, and then outputs it.
+It then verifies that the original sequence is still on the top of the
+stack by outputting it again. Finally, it tests that there's nothing
+else left on the stack by trying to exchange (which should end the
+program) and then outputting an asterisk (which should therefore never
+appear).
+
+In other words, if all works well, the output of this code is
+[[0110111001001110]].
+
+<<testwritestate.sos>>=
++>
+<<0>><<1>><<1>><<0>><<1>><<1>><<1>><<0>>
+<
+<<write state>>
+<<write state>>
+%
+<<write asterisk>>
+
+@ \subsection{Write a single bit}
+
+The bit is output as either the digit 0 or the digit 1. The ASCII code
+for bit value [[x]] is [[0011000x]]. Thus we can just output those 7
+bits, followed by the actual bit.
+<<write and delete bit>>=
+>             Enter bit to output. Terminates loop if none left.
++>            Create and enter auxiliary empty stack
+!!+!!-!!!     Output 0011000.
+<-            Leave and destroy auxiliary stack.
+!             Output the current bit.
+<-            Leave and delete the bit.
+
+@ \subsubsection{Testing write bit}
+
+We can test this routine with a simple routine that outputs a 0 and an
+1 digit, then tries to write a nonexistent digit, which should
+terminate the program.
+
+To check that this really works, another zero bit output follows,
+which should not be executed
+
+<<testwritebit.sos>>=
+<<0>>
+<<write and delete bit>>
+<<1>>
+<<write and delete bit>>
+<<write and delete bit>>
+<<0>>
+<<write and delete bit>>
+
+@ \subsection{Write newline}
+
+When we reach this code, we are in the emptied duplicate stack.
+Therefore we don't need another auxiliary stack.
+
+The line feed character has bit pattern 00001010.
+
+<<write newline>>=
+!!!!+!-!+!-!  Line feed
+
+@ \section{Update state}
+
+To update the state, we first add an extra zero to both ends of the
+current state. Then we create the new state, consuming the old one in
+the process, and finally we destroy the old stack.
+
+<<update state>>=
+<<pad current state>>
+<<calculate next state>>
+<<discard old state>>
+
+@ \subsection{Pad current state with zeros}
+
+We push two zeroes to the top (that is the end), and then rotate the
+stack so that one of the zeros goes
+
+<<pad current state>>=
+>             Enter the current state
+<<0>>
+<<0>>
+}             Put the second zero at the beginning
+<             Leave the state again.
+
+@ \subsection{Calculating the next state}
+
+To calculate the next state, we first push an empty stack to get the
+new state in, which we bury at the bottom of the current stack.
+
+<<calculate next state>>=
++}            Create stack for new state at bottom of current stack.
+
+@ Next we enter a loop, where we first put the top three bits into a
+substack (in reverse order). This will fail if the stack contains less
+than three elements.
+
+<<calculate next state>>=
+(
+  >             Enter current state
+  +%^%^%^       Move top three bits into substack, reversing order
+
+@ We copy two of them back onto the state stack, as we will need them
+for the next iteration.
+
+<<calculate next state>>=
+  >=<_%         Copy topmost bit back
+  >}=<_%>{<     Copy second to top bit back
+
+@ Next, we pop the new three-bit stack from the current state, so we
+can work on it from the root stack.
+
+<<calculate next state>>=
+  <_            Go back to root and pop the three bit stack.
+
+@ Now we apply rule 110 to those three bits. This replaces that stack
+with the single bit output.
+
+<<calculate next state>>=
+  <<apply rule 110>>
+
+@ Finally, we add that state on the new stack. Since we are working
+backwards, we have to move it to the beginning there.
+
+<<calculate next state>>=
+  {             Get new state back from the bottom
+  %             Get new bit up from below it
+  ^             Push the new bit
+  >}<           Move the new bit to the bottom of the new state
+  }             Move the new state back to the bottom.
+
+@ With this, the loop is complete.
+
+<<calculate next state>>=
+)
+
+@ Since we are inside the old state when leaving the loop, we have to
+go back up afterwards.
+
+<<calculate next state>>=
+<             Move back up to root.
+
+@ \subsubsection{Applying rule 110 to three bits}
+
+This is the actual implementation of rule 110.  It takes a stack of
+three bits, with the first on the top, and replaces it
+
+<<apply rule 110>>=
+>             Enter the three bit stack
+
+@ At this point, the current stack contains the three bita needed to
+calculate the new state's bit. Note that each bit is consumed by the
+time we reach endif.
+
+Rule 110 is given by the following table:
+\begin{tabular}{c|c|c|c|c|c|c|c}
+  111 & 110 & 101 & 100 & 011 & 010 & 001 & 000\\
+\hline
+   0  &  1  &  1  &  0  &  1  &  1  &  1  &  0
+\end{tabular}
+This translates into a list of nested ifs. Note that each if tests
+(and consumes) the top bit.
+
+<<apply rule 110>>=
+<<iftrue>>
+  }             Get to the next bit
+  <<iftrue>>
+    }             Get to the next bit
+    <<iftrue>>
+      }             Bury that bit
+      <<0>>
+      {             Bring it back up for the else
+    <<else>>
+      }
+      <<1>>
+      {
+    <<endif>>
+    {
+  <<else>>
+    }
+    <<iftrue>>
+      }
+      <<1>>
+      {
+    <<else>>
+      }
+      <<0>>
+      {
+    <<endif>>
+    {
+  <<endif>>
+  {
+<<else>>
+  }
+  <<iftrue>>
+    }
+    -             Here we need no nested if since both cases are 1.
+    <<1>>
+    {
+  <<else>>
+    }
+    <<iftrue>>
+      }
+      <<1>>
+      {
+    <<else>>
+      }
+      <<0>>
+      {
+    <<endif>>
+    {
+  <<endif>>
+{
+<<endif>>
+<_%-         Move the resulting bit one level up.
+
+@ \subsubsection{Testing application of rule 110}
+
+This program teststhe above code, by generating all eight three bit
+combinations in the order of the table above (remembering that the
+leftmost bit must be on the top, thus the order is reversed in the
+code), then applying that code, and writing the resulting bit.
+
+If working correctly, the test code should print 01101110, or the
+binary representation of the number 110.
+
+<<test110.sos>>=
++>
+<<1>><<1>><<1>>
+<
+<<apply rule 110>>
+<<write and delete bit>>
+
++>
+<<0>><<1>><<1>>
+<
+<<apply rule 110>>
+<<write and delete bit>>
+
++>
+<<1>><<0>><<1>>
+<
+<<apply rule 110>>
+<<write and delete bit>>
+
++>
+<<0>><<0>><<1>>
+<
+<<apply rule 110>>
+<<write and delete bit>>
+
++>
+<<1>><<1>><<0>>
+<
+<<apply rule 110>>
+<<write and delete bit>>
+
++>
+<<0>><<1>><<0>>
+<
+<<apply rule 110>>
+<<write and delete bit>>
+
++>
+<<1>><<0>><<0>>
+<
+<<apply rule 110>>
+<<write and delete bit>>
+
++>
+<<0>><<0>><<0>>
+<
+<<apply rule 110>>
+<<write and delete bit>>
+
+<<write newline>>
+
+@ \subsection{Discarding the remains of the old state}
+
+Since when we get here, the old state is at the top of the stack,
+we can just delete it.
+
+<<discard old state>>=
+-             Discard remains of old state
+
+@ \end{document}

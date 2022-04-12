@@ -1,0 +1,59 @@
++             Push 0
+
+(             Start if block
+  >             Enter the condition.
+
+  +             Add another stack.
+  %             Exchange top elements. Fails if stack was empty.
+  (-)           Empty the stack.
+  <             Go back up to the parent stack.
+
+  +>!!+!-!+!-!+!-!<-
+
+  >             Enter the condition again.
+  -)            Terminate the if block by removing from empty stack
+
+  (-            Start else block.
+
+  <             Leave the condition.
+
+  +>!!+!-!+!!!-!<-
+
+  >             Enter the condition again.
+  -)            Terminate the block.
+
+  <-            Leave and delete the condition.
+
+
++>+<          Push 1
+
+(             Start if block
+  >             Enter the condition.
+
+  +             Add another stack.
+  %             Exchange top elements. Fails if stack was empty.
+  (-)           Empty the stack.
+  <             Go back up to the parent stack.
+
+  +>!!+!-!+!-!+!-!<-
+
+  >             Enter the condition again.
+  -)            Terminate the if block by removing from empty stack
+
+  (-            Start else block.
+
+  <             Leave the condition.
+
+  +>!!+!-!+!!!-!<-
+
+  >             Enter the condition again.
+  -)            Terminate the block.
+
+  <-            Leave and delete the condition.
+
+
+-             Try to delete fr empty stack, terminates program
+
++>!!+!-!+!-!+!-!<-
+ Should never be executed.
+

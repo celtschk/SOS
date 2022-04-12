@@ -1,0 +1,45 @@
++>
++             Push 0
++>+<          Push 1
++>+<          Push 1
++             Push 0
++>+<          Push 1
++>+<          Push 1
++>+<          Push 1
++             Push 0
+
+<
+=>            Duplicate state stack and enter duplicate
+(             Write loop
+  {             Bring up the next bit to write.
+  >             Enter bit to output. Terminates loop if none left.
+  +>            Create and enter auxiliary empty stack
+  !!+!!-!!!     Output 0011000.
+  <-            Leave and destroy auxiliary stack.
+  !             Output the current bit.
+  <-            Leave and delete the bit.
+
+)
+!!!!+!-!+!-!  Line feed
+
+<-            Leave and remove the duplicate stack.
+
+=>            Duplicate state stack and enter duplicate
+(             Write loop
+  {             Bring up the next bit to write.
+  >             Enter bit to output. Terminates loop if none left.
+  +>            Create and enter auxiliary empty stack
+  !!+!!-!!!     Output 0011000.
+  <-            Leave and destroy auxiliary stack.
+  !             Output the current bit.
+  <-            Leave and delete the bit.
+
+)
+!!!!+!-!+!-!  Line feed
+
+<-            Leave and remove the duplicate stack.
+
+%
++>!!+!-!+!-!+!-!<-
+
+

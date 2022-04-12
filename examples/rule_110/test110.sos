@@ -1,0 +1,1419 @@
++>
++>+<          Push 1
++>+<          Push 1
++>+<          Push 1
+
+<
+>             Enter the three bit stack
+
+(             Start if block
+  >             Enter the condition.
+
+  +             Add another stack.
+  %             Exchange top elements. Fails if stack was empty.
+  (-)           Empty the stack.
+  <             Go back up to the parent stack.
+
+  }             Get to the next bit
+  (             Start if block
+    >             Enter the condition.
+
+    +             Add another stack.
+    %             Exchange top elements. Fails if stack was empty.
+    (-)           Empty the stack.
+    <             Go back up to the parent stack.
+
+    }             Get to the next bit
+    (             Start if block
+      >             Enter the condition.
+
+      +             Add another stack.
+      %             Exchange top elements. Fails if stack was empty.
+      (-)           Empty the stack.
+      <             Go back up to the parent stack.
+
+      }             Bury that bit
+      +             Push 0
+
+      {             Bring it back up for the else
+      >             Enter the condition again.
+      -)            Terminate the if block by removing from empty stack
+
+      (-            Start else block.
+
+      <             Leave the condition.
+
+      }
+      +>+<          Push 1
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the block.
+
+      <-            Leave and delete the condition.
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the if block by removing from empty stack
+
+    (-            Start else block.
+
+    <             Leave the condition.
+
+    }
+    (             Start if block
+      >             Enter the condition.
+
+      +             Add another stack.
+      %             Exchange top elements. Fails if stack was empty.
+      (-)           Empty the stack.
+      <             Go back up to the parent stack.
+
+      }
+      +>+<          Push 1
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the if block by removing from empty stack
+
+      (-            Start else block.
+
+      <             Leave the condition.
+
+      }
+      +             Push 0
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the block.
+
+      <-            Leave and delete the condition.
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the block.
+
+    <-            Leave and delete the condition.
+
+  {
+  >             Enter the condition again.
+  -)            Terminate the if block by removing from empty stack
+
+  (-            Start else block.
+
+  <             Leave the condition.
+
+  }
+  (             Start if block
+    >             Enter the condition.
+
+    +             Add another stack.
+    %             Exchange top elements. Fails if stack was empty.
+    (-)           Empty the stack.
+    <             Go back up to the parent stack.
+
+    }
+    -             Here we need no nested if since both cases are 1.
+    +>+<          Push 1
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the if block by removing from empty stack
+
+    (-            Start else block.
+
+    <             Leave the condition.
+
+    }
+    (             Start if block
+      >             Enter the condition.
+
+      +             Add another stack.
+      %             Exchange top elements. Fails if stack was empty.
+      (-)           Empty the stack.
+      <             Go back up to the parent stack.
+
+      }
+      +>+<          Push 1
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the if block by removing from empty stack
+
+      (-            Start else block.
+
+      <             Leave the condition.
+
+      }
+      +             Push 0
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the block.
+
+      <-            Leave and delete the condition.
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the block.
+
+    <-            Leave and delete the condition.
+
+{
+  >             Enter the condition again.
+  -)            Terminate the block.
+
+  <-            Leave and delete the condition.
+
+<_%-         Move the resulting bit one level up.
+
+>             Enter bit to output. Terminates loop if none left.
++>            Create and enter auxiliary empty stack
+!!+!!-!!!     Output 0011000.
+<-            Leave and destroy auxiliary stack.
+!             Output the current bit.
+<-            Leave and delete the bit.
+
+
++>
++             Push 0
++>+<          Push 1
++>+<          Push 1
+
+<
+>             Enter the three bit stack
+
+(             Start if block
+  >             Enter the condition.
+
+  +             Add another stack.
+  %             Exchange top elements. Fails if stack was empty.
+  (-)           Empty the stack.
+  <             Go back up to the parent stack.
+
+  }             Get to the next bit
+  (             Start if block
+    >             Enter the condition.
+
+    +             Add another stack.
+    %             Exchange top elements. Fails if stack was empty.
+    (-)           Empty the stack.
+    <             Go back up to the parent stack.
+
+    }             Get to the next bit
+    (             Start if block
+      >             Enter the condition.
+
+      +             Add another stack.
+      %             Exchange top elements. Fails if stack was empty.
+      (-)           Empty the stack.
+      <             Go back up to the parent stack.
+
+      }             Bury that bit
+      +             Push 0
+
+      {             Bring it back up for the else
+      >             Enter the condition again.
+      -)            Terminate the if block by removing from empty stack
+
+      (-            Start else block.
+
+      <             Leave the condition.
+
+      }
+      +>+<          Push 1
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the block.
+
+      <-            Leave and delete the condition.
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the if block by removing from empty stack
+
+    (-            Start else block.
+
+    <             Leave the condition.
+
+    }
+    (             Start if block
+      >             Enter the condition.
+
+      +             Add another stack.
+      %             Exchange top elements. Fails if stack was empty.
+      (-)           Empty the stack.
+      <             Go back up to the parent stack.
+
+      }
+      +>+<          Push 1
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the if block by removing from empty stack
+
+      (-            Start else block.
+
+      <             Leave the condition.
+
+      }
+      +             Push 0
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the block.
+
+      <-            Leave and delete the condition.
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the block.
+
+    <-            Leave and delete the condition.
+
+  {
+  >             Enter the condition again.
+  -)            Terminate the if block by removing from empty stack
+
+  (-            Start else block.
+
+  <             Leave the condition.
+
+  }
+  (             Start if block
+    >             Enter the condition.
+
+    +             Add another stack.
+    %             Exchange top elements. Fails if stack was empty.
+    (-)           Empty the stack.
+    <             Go back up to the parent stack.
+
+    }
+    -             Here we need no nested if since both cases are 1.
+    +>+<          Push 1
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the if block by removing from empty stack
+
+    (-            Start else block.
+
+    <             Leave the condition.
+
+    }
+    (             Start if block
+      >             Enter the condition.
+
+      +             Add another stack.
+      %             Exchange top elements. Fails if stack was empty.
+      (-)           Empty the stack.
+      <             Go back up to the parent stack.
+
+      }
+      +>+<          Push 1
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the if block by removing from empty stack
+
+      (-            Start else block.
+
+      <             Leave the condition.
+
+      }
+      +             Push 0
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the block.
+
+      <-            Leave and delete the condition.
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the block.
+
+    <-            Leave and delete the condition.
+
+{
+  >             Enter the condition again.
+  -)            Terminate the block.
+
+  <-            Leave and delete the condition.
+
+<_%-         Move the resulting bit one level up.
+
+>             Enter bit to output. Terminates loop if none left.
++>            Create and enter auxiliary empty stack
+!!+!!-!!!     Output 0011000.
+<-            Leave and destroy auxiliary stack.
+!             Output the current bit.
+<-            Leave and delete the bit.
+
+
++>
++>+<          Push 1
++             Push 0
++>+<          Push 1
+
+<
+>             Enter the three bit stack
+
+(             Start if block
+  >             Enter the condition.
+
+  +             Add another stack.
+  %             Exchange top elements. Fails if stack was empty.
+  (-)           Empty the stack.
+  <             Go back up to the parent stack.
+
+  }             Get to the next bit
+  (             Start if block
+    >             Enter the condition.
+
+    +             Add another stack.
+    %             Exchange top elements. Fails if stack was empty.
+    (-)           Empty the stack.
+    <             Go back up to the parent stack.
+
+    }             Get to the next bit
+    (             Start if block
+      >             Enter the condition.
+
+      +             Add another stack.
+      %             Exchange top elements. Fails if stack was empty.
+      (-)           Empty the stack.
+      <             Go back up to the parent stack.
+
+      }             Bury that bit
+      +             Push 0
+
+      {             Bring it back up for the else
+      >             Enter the condition again.
+      -)            Terminate the if block by removing from empty stack
+
+      (-            Start else block.
+
+      <             Leave the condition.
+
+      }
+      +>+<          Push 1
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the block.
+
+      <-            Leave and delete the condition.
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the if block by removing from empty stack
+
+    (-            Start else block.
+
+    <             Leave the condition.
+
+    }
+    (             Start if block
+      >             Enter the condition.
+
+      +             Add another stack.
+      %             Exchange top elements. Fails if stack was empty.
+      (-)           Empty the stack.
+      <             Go back up to the parent stack.
+
+      }
+      +>+<          Push 1
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the if block by removing from empty stack
+
+      (-            Start else block.
+
+      <             Leave the condition.
+
+      }
+      +             Push 0
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the block.
+
+      <-            Leave and delete the condition.
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the block.
+
+    <-            Leave and delete the condition.
+
+  {
+  >             Enter the condition again.
+  -)            Terminate the if block by removing from empty stack
+
+  (-            Start else block.
+
+  <             Leave the condition.
+
+  }
+  (             Start if block
+    >             Enter the condition.
+
+    +             Add another stack.
+    %             Exchange top elements. Fails if stack was empty.
+    (-)           Empty the stack.
+    <             Go back up to the parent stack.
+
+    }
+    -             Here we need no nested if since both cases are 1.
+    +>+<          Push 1
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the if block by removing from empty stack
+
+    (-            Start else block.
+
+    <             Leave the condition.
+
+    }
+    (             Start if block
+      >             Enter the condition.
+
+      +             Add another stack.
+      %             Exchange top elements. Fails if stack was empty.
+      (-)           Empty the stack.
+      <             Go back up to the parent stack.
+
+      }
+      +>+<          Push 1
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the if block by removing from empty stack
+
+      (-            Start else block.
+
+      <             Leave the condition.
+
+      }
+      +             Push 0
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the block.
+
+      <-            Leave and delete the condition.
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the block.
+
+    <-            Leave and delete the condition.
+
+{
+  >             Enter the condition again.
+  -)            Terminate the block.
+
+  <-            Leave and delete the condition.
+
+<_%-         Move the resulting bit one level up.
+
+>             Enter bit to output. Terminates loop if none left.
++>            Create and enter auxiliary empty stack
+!!+!!-!!!     Output 0011000.
+<-            Leave and destroy auxiliary stack.
+!             Output the current bit.
+<-            Leave and delete the bit.
+
+
++>
++             Push 0
++             Push 0
++>+<          Push 1
+
+<
+>             Enter the three bit stack
+
+(             Start if block
+  >             Enter the condition.
+
+  +             Add another stack.
+  %             Exchange top elements. Fails if stack was empty.
+  (-)           Empty the stack.
+  <             Go back up to the parent stack.
+
+  }             Get to the next bit
+  (             Start if block
+    >             Enter the condition.
+
+    +             Add another stack.
+    %             Exchange top elements. Fails if stack was empty.
+    (-)           Empty the stack.
+    <             Go back up to the parent stack.
+
+    }             Get to the next bit
+    (             Start if block
+      >             Enter the condition.
+
+      +             Add another stack.
+      %             Exchange top elements. Fails if stack was empty.
+      (-)           Empty the stack.
+      <             Go back up to the parent stack.
+
+      }             Bury that bit
+      +             Push 0
+
+      {             Bring it back up for the else
+      >             Enter the condition again.
+      -)            Terminate the if block by removing from empty stack
+
+      (-            Start else block.
+
+      <             Leave the condition.
+
+      }
+      +>+<          Push 1
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the block.
+
+      <-            Leave and delete the condition.
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the if block by removing from empty stack
+
+    (-            Start else block.
+
+    <             Leave the condition.
+
+    }
+    (             Start if block
+      >             Enter the condition.
+
+      +             Add another stack.
+      %             Exchange top elements. Fails if stack was empty.
+      (-)           Empty the stack.
+      <             Go back up to the parent stack.
+
+      }
+      +>+<          Push 1
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the if block by removing from empty stack
+
+      (-            Start else block.
+
+      <             Leave the condition.
+
+      }
+      +             Push 0
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the block.
+
+      <-            Leave and delete the condition.
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the block.
+
+    <-            Leave and delete the condition.
+
+  {
+  >             Enter the condition again.
+  -)            Terminate the if block by removing from empty stack
+
+  (-            Start else block.
+
+  <             Leave the condition.
+
+  }
+  (             Start if block
+    >             Enter the condition.
+
+    +             Add another stack.
+    %             Exchange top elements. Fails if stack was empty.
+    (-)           Empty the stack.
+    <             Go back up to the parent stack.
+
+    }
+    -             Here we need no nested if since both cases are 1.
+    +>+<          Push 1
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the if block by removing from empty stack
+
+    (-            Start else block.
+
+    <             Leave the condition.
+
+    }
+    (             Start if block
+      >             Enter the condition.
+
+      +             Add another stack.
+      %             Exchange top elements. Fails if stack was empty.
+      (-)           Empty the stack.
+      <             Go back up to the parent stack.
+
+      }
+      +>+<          Push 1
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the if block by removing from empty stack
+
+      (-            Start else block.
+
+      <             Leave the condition.
+
+      }
+      +             Push 0
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the block.
+
+      <-            Leave and delete the condition.
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the block.
+
+    <-            Leave and delete the condition.
+
+{
+  >             Enter the condition again.
+  -)            Terminate the block.
+
+  <-            Leave and delete the condition.
+
+<_%-         Move the resulting bit one level up.
+
+>             Enter bit to output. Terminates loop if none left.
++>            Create and enter auxiliary empty stack
+!!+!!-!!!     Output 0011000.
+<-            Leave and destroy auxiliary stack.
+!             Output the current bit.
+<-            Leave and delete the bit.
+
+
++>
++>+<          Push 1
++>+<          Push 1
++             Push 0
+
+<
+>             Enter the three bit stack
+
+(             Start if block
+  >             Enter the condition.
+
+  +             Add another stack.
+  %             Exchange top elements. Fails if stack was empty.
+  (-)           Empty the stack.
+  <             Go back up to the parent stack.
+
+  }             Get to the next bit
+  (             Start if block
+    >             Enter the condition.
+
+    +             Add another stack.
+    %             Exchange top elements. Fails if stack was empty.
+    (-)           Empty the stack.
+    <             Go back up to the parent stack.
+
+    }             Get to the next bit
+    (             Start if block
+      >             Enter the condition.
+
+      +             Add another stack.
+      %             Exchange top elements. Fails if stack was empty.
+      (-)           Empty the stack.
+      <             Go back up to the parent stack.
+
+      }             Bury that bit
+      +             Push 0
+
+      {             Bring it back up for the else
+      >             Enter the condition again.
+      -)            Terminate the if block by removing from empty stack
+
+      (-            Start else block.
+
+      <             Leave the condition.
+
+      }
+      +>+<          Push 1
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the block.
+
+      <-            Leave and delete the condition.
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the if block by removing from empty stack
+
+    (-            Start else block.
+
+    <             Leave the condition.
+
+    }
+    (             Start if block
+      >             Enter the condition.
+
+      +             Add another stack.
+      %             Exchange top elements. Fails if stack was empty.
+      (-)           Empty the stack.
+      <             Go back up to the parent stack.
+
+      }
+      +>+<          Push 1
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the if block by removing from empty stack
+
+      (-            Start else block.
+
+      <             Leave the condition.
+
+      }
+      +             Push 0
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the block.
+
+      <-            Leave and delete the condition.
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the block.
+
+    <-            Leave and delete the condition.
+
+  {
+  >             Enter the condition again.
+  -)            Terminate the if block by removing from empty stack
+
+  (-            Start else block.
+
+  <             Leave the condition.
+
+  }
+  (             Start if block
+    >             Enter the condition.
+
+    +             Add another stack.
+    %             Exchange top elements. Fails if stack was empty.
+    (-)           Empty the stack.
+    <             Go back up to the parent stack.
+
+    }
+    -             Here we need no nested if since both cases are 1.
+    +>+<          Push 1
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the if block by removing from empty stack
+
+    (-            Start else block.
+
+    <             Leave the condition.
+
+    }
+    (             Start if block
+      >             Enter the condition.
+
+      +             Add another stack.
+      %             Exchange top elements. Fails if stack was empty.
+      (-)           Empty the stack.
+      <             Go back up to the parent stack.
+
+      }
+      +>+<          Push 1
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the if block by removing from empty stack
+
+      (-            Start else block.
+
+      <             Leave the condition.
+
+      }
+      +             Push 0
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the block.
+
+      <-            Leave and delete the condition.
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the block.
+
+    <-            Leave and delete the condition.
+
+{
+  >             Enter the condition again.
+  -)            Terminate the block.
+
+  <-            Leave and delete the condition.
+
+<_%-         Move the resulting bit one level up.
+
+>             Enter bit to output. Terminates loop if none left.
++>            Create and enter auxiliary empty stack
+!!+!!-!!!     Output 0011000.
+<-            Leave and destroy auxiliary stack.
+!             Output the current bit.
+<-            Leave and delete the bit.
+
+
++>
++             Push 0
++>+<          Push 1
++             Push 0
+
+<
+>             Enter the three bit stack
+
+(             Start if block
+  >             Enter the condition.
+
+  +             Add another stack.
+  %             Exchange top elements. Fails if stack was empty.
+  (-)           Empty the stack.
+  <             Go back up to the parent stack.
+
+  }             Get to the next bit
+  (             Start if block
+    >             Enter the condition.
+
+    +             Add another stack.
+    %             Exchange top elements. Fails if stack was empty.
+    (-)           Empty the stack.
+    <             Go back up to the parent stack.
+
+    }             Get to the next bit
+    (             Start if block
+      >             Enter the condition.
+
+      +             Add another stack.
+      %             Exchange top elements. Fails if stack was empty.
+      (-)           Empty the stack.
+      <             Go back up to the parent stack.
+
+      }             Bury that bit
+      +             Push 0
+
+      {             Bring it back up for the else
+      >             Enter the condition again.
+      -)            Terminate the if block by removing from empty stack
+
+      (-            Start else block.
+
+      <             Leave the condition.
+
+      }
+      +>+<          Push 1
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the block.
+
+      <-            Leave and delete the condition.
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the if block by removing from empty stack
+
+    (-            Start else block.
+
+    <             Leave the condition.
+
+    }
+    (             Start if block
+      >             Enter the condition.
+
+      +             Add another stack.
+      %             Exchange top elements. Fails if stack was empty.
+      (-)           Empty the stack.
+      <             Go back up to the parent stack.
+
+      }
+      +>+<          Push 1
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the if block by removing from empty stack
+
+      (-            Start else block.
+
+      <             Leave the condition.
+
+      }
+      +             Push 0
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the block.
+
+      <-            Leave and delete the condition.
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the block.
+
+    <-            Leave and delete the condition.
+
+  {
+  >             Enter the condition again.
+  -)            Terminate the if block by removing from empty stack
+
+  (-            Start else block.
+
+  <             Leave the condition.
+
+  }
+  (             Start if block
+    >             Enter the condition.
+
+    +             Add another stack.
+    %             Exchange top elements. Fails if stack was empty.
+    (-)           Empty the stack.
+    <             Go back up to the parent stack.
+
+    }
+    -             Here we need no nested if since both cases are 1.
+    +>+<          Push 1
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the if block by removing from empty stack
+
+    (-            Start else block.
+
+    <             Leave the condition.
+
+    }
+    (             Start if block
+      >             Enter the condition.
+
+      +             Add another stack.
+      %             Exchange top elements. Fails if stack was empty.
+      (-)           Empty the stack.
+      <             Go back up to the parent stack.
+
+      }
+      +>+<          Push 1
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the if block by removing from empty stack
+
+      (-            Start else block.
+
+      <             Leave the condition.
+
+      }
+      +             Push 0
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the block.
+
+      <-            Leave and delete the condition.
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the block.
+
+    <-            Leave and delete the condition.
+
+{
+  >             Enter the condition again.
+  -)            Terminate the block.
+
+  <-            Leave and delete the condition.
+
+<_%-         Move the resulting bit one level up.
+
+>             Enter bit to output. Terminates loop if none left.
++>            Create and enter auxiliary empty stack
+!!+!!-!!!     Output 0011000.
+<-            Leave and destroy auxiliary stack.
+!             Output the current bit.
+<-            Leave and delete the bit.
+
+
++>
++>+<          Push 1
++             Push 0
++             Push 0
+
+<
+>             Enter the three bit stack
+
+(             Start if block
+  >             Enter the condition.
+
+  +             Add another stack.
+  %             Exchange top elements. Fails if stack was empty.
+  (-)           Empty the stack.
+  <             Go back up to the parent stack.
+
+  }             Get to the next bit
+  (             Start if block
+    >             Enter the condition.
+
+    +             Add another stack.
+    %             Exchange top elements. Fails if stack was empty.
+    (-)           Empty the stack.
+    <             Go back up to the parent stack.
+
+    }             Get to the next bit
+    (             Start if block
+      >             Enter the condition.
+
+      +             Add another stack.
+      %             Exchange top elements. Fails if stack was empty.
+      (-)           Empty the stack.
+      <             Go back up to the parent stack.
+
+      }             Bury that bit
+      +             Push 0
+
+      {             Bring it back up for the else
+      >             Enter the condition again.
+      -)            Terminate the if block by removing from empty stack
+
+      (-            Start else block.
+
+      <             Leave the condition.
+
+      }
+      +>+<          Push 1
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the block.
+
+      <-            Leave and delete the condition.
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the if block by removing from empty stack
+
+    (-            Start else block.
+
+    <             Leave the condition.
+
+    }
+    (             Start if block
+      >             Enter the condition.
+
+      +             Add another stack.
+      %             Exchange top elements. Fails if stack was empty.
+      (-)           Empty the stack.
+      <             Go back up to the parent stack.
+
+      }
+      +>+<          Push 1
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the if block by removing from empty stack
+
+      (-            Start else block.
+
+      <             Leave the condition.
+
+      }
+      +             Push 0
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the block.
+
+      <-            Leave and delete the condition.
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the block.
+
+    <-            Leave and delete the condition.
+
+  {
+  >             Enter the condition again.
+  -)            Terminate the if block by removing from empty stack
+
+  (-            Start else block.
+
+  <             Leave the condition.
+
+  }
+  (             Start if block
+    >             Enter the condition.
+
+    +             Add another stack.
+    %             Exchange top elements. Fails if stack was empty.
+    (-)           Empty the stack.
+    <             Go back up to the parent stack.
+
+    }
+    -             Here we need no nested if since both cases are 1.
+    +>+<          Push 1
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the if block by removing from empty stack
+
+    (-            Start else block.
+
+    <             Leave the condition.
+
+    }
+    (             Start if block
+      >             Enter the condition.
+
+      +             Add another stack.
+      %             Exchange top elements. Fails if stack was empty.
+      (-)           Empty the stack.
+      <             Go back up to the parent stack.
+
+      }
+      +>+<          Push 1
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the if block by removing from empty stack
+
+      (-            Start else block.
+
+      <             Leave the condition.
+
+      }
+      +             Push 0
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the block.
+
+      <-            Leave and delete the condition.
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the block.
+
+    <-            Leave and delete the condition.
+
+{
+  >             Enter the condition again.
+  -)            Terminate the block.
+
+  <-            Leave and delete the condition.
+
+<_%-         Move the resulting bit one level up.
+
+>             Enter bit to output. Terminates loop if none left.
++>            Create and enter auxiliary empty stack
+!!+!!-!!!     Output 0011000.
+<-            Leave and destroy auxiliary stack.
+!             Output the current bit.
+<-            Leave and delete the bit.
+
+
++>
++             Push 0
++             Push 0
++             Push 0
+
+<
+>             Enter the three bit stack
+
+(             Start if block
+  >             Enter the condition.
+
+  +             Add another stack.
+  %             Exchange top elements. Fails if stack was empty.
+  (-)           Empty the stack.
+  <             Go back up to the parent stack.
+
+  }             Get to the next bit
+  (             Start if block
+    >             Enter the condition.
+
+    +             Add another stack.
+    %             Exchange top elements. Fails if stack was empty.
+    (-)           Empty the stack.
+    <             Go back up to the parent stack.
+
+    }             Get to the next bit
+    (             Start if block
+      >             Enter the condition.
+
+      +             Add another stack.
+      %             Exchange top elements. Fails if stack was empty.
+      (-)           Empty the stack.
+      <             Go back up to the parent stack.
+
+      }             Bury that bit
+      +             Push 0
+
+      {             Bring it back up for the else
+      >             Enter the condition again.
+      -)            Terminate the if block by removing from empty stack
+
+      (-            Start else block.
+
+      <             Leave the condition.
+
+      }
+      +>+<          Push 1
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the block.
+
+      <-            Leave and delete the condition.
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the if block by removing from empty stack
+
+    (-            Start else block.
+
+    <             Leave the condition.
+
+    }
+    (             Start if block
+      >             Enter the condition.
+
+      +             Add another stack.
+      %             Exchange top elements. Fails if stack was empty.
+      (-)           Empty the stack.
+      <             Go back up to the parent stack.
+
+      }
+      +>+<          Push 1
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the if block by removing from empty stack
+
+      (-            Start else block.
+
+      <             Leave the condition.
+
+      }
+      +             Push 0
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the block.
+
+      <-            Leave and delete the condition.
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the block.
+
+    <-            Leave and delete the condition.
+
+  {
+  >             Enter the condition again.
+  -)            Terminate the if block by removing from empty stack
+
+  (-            Start else block.
+
+  <             Leave the condition.
+
+  }
+  (             Start if block
+    >             Enter the condition.
+
+    +             Add another stack.
+    %             Exchange top elements. Fails if stack was empty.
+    (-)           Empty the stack.
+    <             Go back up to the parent stack.
+
+    }
+    -             Here we need no nested if since both cases are 1.
+    +>+<          Push 1
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the if block by removing from empty stack
+
+    (-            Start else block.
+
+    <             Leave the condition.
+
+    }
+    (             Start if block
+      >             Enter the condition.
+
+      +             Add another stack.
+      %             Exchange top elements. Fails if stack was empty.
+      (-)           Empty the stack.
+      <             Go back up to the parent stack.
+
+      }
+      +>+<          Push 1
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the if block by removing from empty stack
+
+      (-            Start else block.
+
+      <             Leave the condition.
+
+      }
+      +             Push 0
+
+      {
+      >             Enter the condition again.
+      -)            Terminate the block.
+
+      <-            Leave and delete the condition.
+
+    {
+    >             Enter the condition again.
+    -)            Terminate the block.
+
+    <-            Leave and delete the condition.
+
+{
+  >             Enter the condition again.
+  -)            Terminate the block.
+
+  <-            Leave and delete the condition.
+
+<_%-         Move the resulting bit one level up.
+
+>             Enter bit to output. Terminates loop if none left.
++>            Create and enter auxiliary empty stack
+!!+!!-!!!     Output 0011000.
+<-            Leave and destroy auxiliary stack.
+!             Output the current bit.
+<-            Leave and delete the bit.
+
+
+!!!!+!-!+!-!  Line feed
+
+

@@ -1,0 +1,35 @@
++             Push 0
+
+>             Enter bit to output. Terminates loop if none left.
++>            Create and enter auxiliary empty stack
+!!+!!-!!!     Output 0011000.
+<-            Leave and destroy auxiliary stack.
+!             Output the current bit.
+<-            Leave and delete the bit.
+
++>+<          Push 1
+
+>             Enter bit to output. Terminates loop if none left.
++>            Create and enter auxiliary empty stack
+!!+!!-!!!     Output 0011000.
+<-            Leave and destroy auxiliary stack.
+!             Output the current bit.
+<-            Leave and delete the bit.
+
+>             Enter bit to output. Terminates loop if none left.
++>            Create and enter auxiliary empty stack
+!!+!!-!!!     Output 0011000.
+<-            Leave and destroy auxiliary stack.
+!             Output the current bit.
+<-            Leave and delete the bit.
+
++             Push 0
+
+>             Enter bit to output. Terminates loop if none left.
++>            Create and enter auxiliary empty stack
+!!+!!-!!!     Output 0011000.
+<-            Leave and destroy auxiliary stack.
+!             Output the current bit.
+<-            Leave and delete the bit.
+
+

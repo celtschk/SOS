@@ -1,0 +1,16 @@
+(             loop until EOF
+  +>            Create an emtpy stack and enter it.
+  ???????       Read the first 7 bits of the byte.
+  (-)           Discard everything read so far.
+  ?             Read the lowest bit.
+  <             Leave the stack of the new bit, returning to the parent stack.
+
+  >             Enter bit to output. Terminates loop if none left.
+  +>            Create and enter auxiliary empty stack
+  !!+!!-!!!     Output 0011000.
+  <-            Leave and destroy auxiliary stack.
+  !             Output the current bit.
+  <-            Leave and delete the bit.
+
+)
+
