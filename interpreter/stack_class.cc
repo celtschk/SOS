@@ -69,12 +69,12 @@ void stack::rotate_right()
 
 void stack::print(stack const* current) const
 {
-  if (this == current)
-    std::cerr << " < ";
   std::cerr << "[";
+  if (this == current)
+    std::cerr << " ";
   for (stack* item: contents)
     item->print(current);
-  std::cerr << "]";
   if (this == current)
-    std::cerr << " > ";
+    std::cerr << " ";
+  std::cerr << "]";
 }
