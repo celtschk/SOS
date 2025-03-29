@@ -218,9 +218,9 @@ As in the previous program, the stack is now cleared for the next iteration of t
 
 This repository includes an interpreter for the SOS programming language written in C++.
 
-To build the interpreter, just compile all C++ souce files (`*.cc`) into a program. A simple makefile that works under Linux is also provided; running `make` in the directory `interpreter` will build an executable called `sos`.
+To build the interpreter, just compile all C++ souce files (`*.cc`) into a program. A CMakeLists.txt for cmake is also provided.
 
-In the following, I'm assuming the executable can be executed with `interpreter/sos` (this is the case a.g. if you used the provided makefile, or if you compiled to `sos.exe` under Windows, and you are currently in the main directory of this repository). Otherwise, replace `interpreter/sos` with whatever path and name the executable has in your system.
+In the following, I'm assuming the executable can be executed with `interpreter/sos`. Otherwise, replace `interpreter/sos` with whatever path and name the executable has in your system.
 
 The interpreter can read the program either from a file, or directly from the command line. To run a command from a file, just type
 ```
