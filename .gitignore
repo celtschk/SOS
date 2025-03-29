@@ -31,3 +31,6 @@
 *.out
 *.app
 interpreter/sos
+
+# build directory
+build
